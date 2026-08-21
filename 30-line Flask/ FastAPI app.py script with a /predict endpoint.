@@ -1,0 +1,32 @@
+import joblib, re
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+
+app = FastAPI(title="Phishing Detection API")
+app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
+
+model = joblib.load("model.pkl")
+vectorizer = joblib.load("vectorizer.pkl")
+
+class EmailPayload(BaseModel):
+    email_text: str
+
+def clean_text(text: str) -> str:
+    text = re.sub(r"<[^>]+>", " ", text.lower())
+    text = re.sub(r"https?://\S+|www\.\S+", " url_token ", text)
+    text = re.sub(r"[^a-zA-Z\s]", " ", text)
+    return re.sub(r"\s+", " ", text).strip()
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}
+
+@app.post("/predict")
+def predict(data: EmailPayload):
+    if not data.email_text.strip():
+        raise HTTPException(status_code=400, detail="Empty email text")
+    vec = vectorizer.transform([clean_text(data.email_text)])
+    pred = int(model.predict(vec)[0])
+    prob = float(model.predict_proba(vec)[0][pred])
+    return {"label": "phishing" if pred == 1 else "safe", "confidence": round(prob, 4), "is_phishing": pred == 1}
