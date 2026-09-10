@@ -1,0 +1,13 @@
+--- Review 2 ML Metrics Note ---
+Model Chosen: Random Forest
+Features Used: TF-IDF (top 5000), link_count, urgency_density, sender_mismatch
+
+Cross-Validation F1 (5-fold):
+- Naive Bayes: 0.9081
+- Random Forest: 0.9154
+
+Final Test Set Evaluation:
+Accuracy:  0.9785
+Precision: 0.9921
+Recall:    0.8456
+F1-Score:  0.9130
