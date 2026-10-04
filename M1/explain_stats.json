@@ -1,0 +1,22 @@
+{
+  "means": {
+    "link_count": 2.760270506509638e-05,
+    "urgency_density": 0.4397376822928647,
+    "placeholder_density": 3.4206937479873027,
+    "sender_mismatch": 0.16299397340939412,
+    "has_ip_link": 0.0,
+    "has_shortened_link": 0.0,
+    "has_punycode": 0.0,
+    "lookalike_domain_score": 0.0
+  },
+  "stds": {
+    "link_count": 0.005253779317869333,
+    "urgency_density": 1.2073574320967357,
+    "placeholder_density": 6.3108222077355824,
+    "sender_mismatch": 0.36936187310550334,
+    "has_ip_link": 1.0,
+    "has_shortened_link": 1.0,
+    "has_punycode": 1.0,
+    "lookalike_domain_score": 1.0
+  }
+}

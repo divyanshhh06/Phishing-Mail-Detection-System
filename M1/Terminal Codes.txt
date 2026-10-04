@@ -1,0 +1,16 @@
+py -0
+ 
+cd "C:\Users\Prometheus\Desktop\Project Exhibition I\Review3"
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
+
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+
+python -m pip install --upgrade pip
+python -m pip install pandas numpy matplotlib seaborn wordcloud tldextract
+
+python eda.py
+
+cd "C:\Users\Prometheus\Desktop\Project Exhibition I\Review3"
+.\.venv\Scripts\Activate.ps1
+python eda.py
